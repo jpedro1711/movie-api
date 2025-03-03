@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+        - POSTGRES_USER=course
+        - POSTGRES_PASSWORD=changeme
+        - POSTGRES_DB=movies
+    ports:
+        - '5432:5432' 
+  movies.api:
+    image: ${DOCKER_REGISTRY-}moviesapi
+    build:
+      context: .
+      dockerfile: Movies.Api/Dockerfile 
